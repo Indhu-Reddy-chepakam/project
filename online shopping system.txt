@@ -1,0 +1,121 @@
+// Define classes
+class Product {
+    private String name;
+    private String description;
+    private double price;
+    private int id;
+
+    public Product(String name, String description, double price, int id) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        (link unavailable) = id;
+    }
+
+    // Getters and setters
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public double getPrice() { return price; }
+    public int getId() { return id; }
+}
+
+class Inventory {
+    private int stock;
+
+    public Inventory() {
+        stock = 0;
+    }
+
+    public void addProduct(Product product, int quantity) {
+        stock += quantity;
+    }
+
+    public boolean inStock(Product product) {
+        return stock > 0;
+    }
+}
+
+class Customer {
+    private String name;
+    private String address;
+    private String email;
+
+    public Customer(String name, String address, String email) {
+        this.name = name;
+        this.address = address;
+        this.email = email;
+    }
+
+    // Getters and setters
+    public String getName() { return name; }
+    public String getAddress() { return address; }
+    public String getEmail() { return email; }
+}
+
+class ShoppingCart {
+    private double totalCost;
+    private Product product;
+
+    public ShoppingCart() {
+        totalCost = 0;
+    }
+
+    public void addProduct(Product product) {
+        totalCost += product.getPrice();
+        this.product = product;
+    }
+
+    public double totalCost() {
+        return totalCost;
+    }
+}
+
+class Payment {
+    private double amount;
+    private String paymentMethod;
+
+    public Payment(double amount, String paymentMethod) {
+        this.amount = amount;
+        this.paymentMethod = paymentMethod;
+    }
+
+    // Getters
+    public double getAmount() { return amount; }
+    public String getPaymentMethod() { return paymentMethod; }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Create product
+        Product p1 = new Product("Phone", "New Phone", 999.99, 161);
+
+        // Create inventory
+        Inventory inventory = new Inventory();
+        inventory.addProduct(p1, 10);
+
+        // Create customer
+        Customer c1 = new Customer("John Smith", "123 Main St", "johnsmith@email.com");
+
+        // Create shopping cart
+        ShoppingCart cart = new ShoppingCart();
+        cart.addProduct(p1);
+
+        // Check if product is in stock
+        if (inventory.inStock(p1)) {
+            System.out.println("Product is in stock");
+        } else {
+            System.out.println("Product is out of stock");
+        }
+
+        // Print total cost
+        System.out.println("Total cost: Rs " + cart.totalCost());
+
+        // Create payment
+        Payment payment = new Payment(cart.totalCost(), "Credit Card");
+
+        // Print payment details
+        System.out.println("Payment amount: Rs " + payment.getAmount());
+        System.out.println("Payment method: " + payment.getPaymentMethod());
+    }
+}
